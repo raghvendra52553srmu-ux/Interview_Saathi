@@ -274,6 +274,39 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
+       {/* Column 4: Socials & Newsletter */}
+                    <div>
+                        <h4 className="text-white font-semibold mb-4">Connect</h4>
+                        <p className="text-slate-400 text-sm mb-4">Follow our journey on social media.</p>
+                        <div className="flex items-center gap-3">
+                            <SocialLink 
+                                href="https://www.linkedin.com/in/raghvendra-pand0ey-85144b387?utm_source=share_via&utm_content=profile&utm_medium=member_android"
+                                icon={<Linkedin size={18} />} 
+                                color="hover:bg-blue-600 hover:border-blue-500"
+                            />
+                            <SocialLink 
+                                href="https://www.linkedin.com/in/shubh-lakshna-pandey-0a01602bb?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+                                icon={<Linkedin size={18} />} 
+                                color="hover:bg-blue-600 hover:border-blue-500"
+                            />
+                            <SocialLink 
+                                href="#" 
+                                icon={<Github size={18} />} 
+                                color="hover:bg-gray-700 hover:border-gray-600"
+                            />
+                            <SocialLink 
+                                href="#" 
+                                icon={<Twitter size={18} />} 
+                                color="hover:bg-sky-500 hover:border-sky-400"
+                            />
+                            <SocialLink 
+                                href="#" 
+                                icon={<Globe size={18} />} 
+                                color="hover:bg-indigo-600 hover:border-indigo-500"
+                            />
+                        </div>
+                    </div>
+                </div>
 
       {/* Footer */}
       <footer className="py-8 px-4 border-t border-white/5 text-center text-ink-400 text-sm">
