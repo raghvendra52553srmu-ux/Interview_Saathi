@@ -1,79 +1,79 @@
-import React from 'react'
-import { Mic, Square, RotateCcw } from 'lucide-react'
+import { useState, useRef } from 'react';
 
-/**
- * RecordingButton - Animated recording control
- * Shows mic button, stop button, and reset button states
- */
-export default function RecordingButton({ isRecording, hasRecording, duration, onStart, onStop, onReset }) {
-  const formatDuration = (secs) => {
-    const m = Math.floor(secs / 60)
-    const s = secs % 60
-    return `${m}:${s.toString().padStart(2, '0')}`
-  }
+const useAudioRecorder = () => {
+  const [isRecording, setIsRecording] = useState(false);
+  const [audioBlob, setAudioBlob] = useState(null); // Final audio file
+  const [duration, setDuration] = useState(0); // Timer
+  
+  const mediaRecorderRef = useRef(null);
+  const timerRef = useRef(null);
+  const chunksRef = useRef([]);
 
-  return (
-    <div className="flex flex-col items-center gap-4">
+  // Start Recording
+  const startRecording = async () => {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      mediaRecorderRef.current = new MediaRecorder(stream);
+      chunksRef.current = []; // Clear old data
 
-      {/* Main recording button */}
-      <div className="relative">
-        {/* Outer pulse ring (only when recording) */}
-        {isRecording && (
-          <>
-            <div className="absolute inset-0 rounded-full border-2 border-red-500 opacity-40 recording-pulse
-                            scale-125 pointer-events-none" />
-            <div className="absolute inset-0 rounded-full border-2 border-red-400 opacity-20
-                            scale-150 animate-ping pointer-events-none" />
-          </>
-        )}
+      // Jab data available ho (chunk by chunk)
+      mediaRecorderRef.current.ondataavailable = (e) => {
+        if (e.data.size > 0) {
+          chunksRef.current.push(e.data);
+        }
+      };
 
-        <button
-          onClick={isRecording ? onStop : onStart}
-          className={`w-20 h-20 rounded-full flex items-center justify-center
-                      font-bold text-white transition-all duration-300 relative z-10
-                      ${isRecording
-                        ? 'bg-red-600 hover:bg-red-700 shadow-lg shadow-red-600/40'
-                        : hasRecording
-                          ? 'bg-ink-700 hover:bg-ink-600 cursor-not-allowed'
-                          : 'btn-primary glow-blue'
-                      }`}
-          disabled={hasRecording && !isRecording}>
+      // Jab recording stop ho
+      mediaRecorderRef.current.onstop = () => {
+        const blob = new Blob(chunksRef.current, { type: 'audio/webm' });
+        setAudioBlob(blob);
+        chunksRef.current = [];
+      };
 
-          {isRecording
-            ? <Square size={28} fill="white" />
-            : <Mic size={28} />
-          }
-        </button>
-      </div>
+      mediaRecorderRef.current.start();
+      setIsRecording(true);
+      
+      // Timer start karo
+      setDuration(0);
+      timerRef.current = setInterval(() => {
+        setDuration((prev) => prev + 1);
+      }, 1000);
 
-      {/* Status label */}
-      <div className="text-center">
-        {isRecording ? (
-          <div className="flex items-center gap-2">
-            <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
-            <span className="text-red-400 font-mono font-medium text-sm">
-              Recording · {formatDuration(duration)}
-            </span>
-          </div>
-        ) : hasRecording ? (
-          <span className="text-green-400 font-medium text-sm flex items-center gap-1">
-            ✓ Recording saved ({formatDuration(duration)}s)
-          </span>
-        ) : (
-          <span className="text-ink-400 text-sm">Click to start recording</span>
-        )}
-      </div>
+    } catch (err) {
+      console.error("Mic access denied:", err);
+      alert("Please allow microphone access to record.");
+    }
+  };
 
-      {/* Reset button */}
-      {hasRecording && !isRecording && (
-        <button
-          onClick={onReset}
-          className="flex items-center gap-1.5 text-ink-400 hover:text-ink-200
-                     text-sm transition-colors duration-200">
-          <RotateCcw size={13} />
-          Record Again
-        </button>
-      )}
-    </div>
-  )
-}
+  //  Stop Recording
+  const stopRecording = () => {
+    if (mediaRecorderRef.current && isRecording) {
+      mediaRecorderRef.current.stop();
+      setIsRecording(false);
+      
+      // Stop Timer
+      clearInterval(timerRef.current);
+      
+      // Stop all mic streams (Important to turn off red dot on browser tab)
+      mediaRecorderRef.current.stream.getTracks().forEach(track => track.stop());
+    }
+  };
+
+  // Reset Recording
+  const resetRecording = () => {
+    setAudioBlob(null);
+    setDuration(0);
+    setIsRecording(false);
+  };
+
+  return {
+    isRecording,
+    audioBlob,    // Ye backend pe bhejna hai
+    duration,
+    startRecording,
+    stopRecording,
+    resetRecording
+  };
+};
+
+export default useAudioRecorder;
