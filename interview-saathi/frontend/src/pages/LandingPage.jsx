@@ -274,7 +274,55 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
-       {/* Column 4: Socials & Newsletter */}
+        
+const Footer = () => {
+    return (
+        <footer className="relative bg-slate-950 pt-16 pb-8 overflow-hidden">
+            
+            {/* Top Glowing Border Line */}
+            <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-indigo-500 to-transparent opacity-50"></div>
+
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+                    
+                    {/* Column 1: Brand Info */}
+                    <div className="space-y-4">
+                        <h3 className="text-2xl font-bold text-white tracking-tight">
+                            Interview<span className="text-indigo-400">Saathi</span>
+                        </h3>
+                        <p className="text-slate-400 text-sm leading-relaxed">
+                            Empowering vernacular students to crack global interviews with confidence. Your personal AI communication coach.
+                        </p>
+                        <div className="flex items-center gap-2 text-slate-400 text-sm mt-4">
+                            <Mail size={16} className="text-indigo-400" />
+                            <span>hello@interviewsaathi.com</span>
+                        </div>
+                    </div>
+
+                    {/* Column 2: Quick Links */}
+                    <div>
+                        <h4 className="text-white font-semibold mb-4">Product</h4>
+                        <ul className="space-y-2">
+                            <FooterLink href="#">Features</FooterLink>
+                            <FooterLink href="#">How it Works</FooterLink>
+                            <FooterLink href="#">Pricing</FooterLink>
+                            <FooterLink href="#">Success Stories</FooterLink>
+                        </ul>
+                    </div>
+
+                    {/* Column 3: Resources */}
+                    <div>
+                        <h4 className="text-white font-semibold mb-4">Resources</h4>
+                        <ul className="space-y-2">
+                            <FooterLink href="#">Interview Tips</FooterLink>
+                            <FooterLink href="#">Blog</FooterLink>
+                            <FooterLink href="#">Community</FooterLink>
+                            <FooterLink href="#">Help Center</FooterLink>
+                        </ul>
+                    </div>
+
+                    {/* Column 4: Socials & Newsletter */}
                     <div>
                         <h4 className="text-white font-semibold mb-4">Connect</h4>
                         <p className="text-slate-400 text-sm mb-4">Follow our journey on social media.</p>
@@ -308,6 +356,154 @@ export default function LandingPage() {
                     </div>
                 </div>
 
+                {/* Divider */}
+                <div className="w-full h-px bg-slate-800 my-8"></div>
+
+                {/* Bottom Bar */}
+                <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+                    <p className="text-slate-500 text-sm flex items-center gap-1">
+                        &copy; {new Date().getFullYear()} InterviewSaathi. Built with 
+                        <Heart size={14} className="text-rose-500 fill-rose-500 animate-pulse" /> 
+                        by <span className="text-slate-300 font-medium">Knight Coders</span>.
+                    </p>
+                    
+                    <div className="flex gap-6 text-sm text-slate-500">
+                        <a href="#" className="hover:text-indigo-400 transition-colors">Privacy Policy</a>
+                        <a href="#" className="hover:text-indigo-400 transition-colors">Terms of Service</a>
+                    </div>
+                </div>
+
+            </div>
+        </footer>
+    );
+};
+  const Footer = () => {
+    return (
+        <footer className="relative bg-slate-950 pt-16 pb-8 overflow-hidden">
+            
+            {/* Top Glowing Border Line */}
+            <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-indigo-500 to-transparent opacity-50"></div>
+
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+                    
+                    {/* Column 1: Brand Info */}
+                    <div className="space-y-4">
+                        <h3 className="text-2xl font-bold text-white tracking-tight">
+                            Interview<span className="text-indigo-400">Saathi</span>
+                        </h3>
+                        <p className="text-slate-400 text-sm leading-relaxed">
+                            Empowering vernacular students to crack global interviews with confidence. Your personal AI communication coach.
+                        </p>
+                        <div className="flex items-center gap-2 text-slate-400 text-sm mt-4">
+                            <Mail size={16} className="text-indigo-400" />
+                            <span>hello@interviewsaathi.com</span>
+                        </div>
+                    </div>
+
+                    {/* Column 2: Quick Links */}
+                    <div>
+                        <h4 className="text-white font-semibold mb-4">Product</h4>
+                        <ul className="space-y-2">
+                            <FooterLink href="#">Features</FooterLink>
+                            <FooterLink href="#">How it Works</FooterLink>
+                            <FooterLink href="#">Pricing</FooterLink>
+                            <FooterLink href="#">Success Stories</FooterLink>
+                        </ul>
+                    </div>
+
+                    {/* Column 3: Resources */}
+                    <div>
+                        <h4 className="text-white font-semibold mb-4">Resources</h4>
+                        <ul className="space-y-2">
+                            <FooterLink href="#">Interview Tips</FooterLink>
+                            <FooterLink href="#">Blog</FooterLink>
+                            <FooterLink href="#">Community</FooterLink>
+                            <FooterLink href="#">Help Center</FooterLink>
+                        </ul>
+                    </div>
+
+                    {/* Column 4: Socials & Newsletter */}
+                    <div>
+                        <h4 className="text-white font-semibold mb-4">Connect</h4>
+                        <p className="text-slate-400 text-sm mb-4">Follow our journey on social media.</p>
+                        <div className="flex items-center gap-3">
+                            <SocialLink 
+                                href="https://www.linkedin.com/in/raghvendra-pand0ey-85144b387?utm_source=share_via&utm_content=profile&utm_medium=member_android"
+                                icon={<Linkedin size={18} />} 
+                                color="hover:bg-blue-600 hover:border-blue-500"
+                            />
+                            <SocialLink 
+                                href="https://www.linkedin.com/in/shubh-lakshna-pandey-0a01602bb?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+                                icon={<Linkedin size={18} />} 
+                                color="hover:bg-blue-600 hover:border-blue-500"
+                            />
+                            <SocialLink 
+                                href="#" 
+                                icon={<Github size={18} />} 
+                                color="hover:bg-gray-700 hover:border-gray-600"
+                            />
+                            <SocialLink 
+                                href="#" 
+                                icon={<Twitter size={18} />} 
+                                color="hover:bg-sky-500 hover:border-sky-400"
+                            />
+                            <SocialLink 
+                                href="#" 
+                                icon={<Globe size={18} />} 
+                                color="hover:bg-indigo-600 hover:border-indigo-500"
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                {/* Divider */}
+                <div className="w-full h-px bg-slate-800 my-8"></div>
+
+                {/* Bottom Bar */}
+                <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+                    <p className="text-slate-500 text-sm flex items-center gap-1">
+                        &copy; {new Date().getFullYear()} InterviewSaathi. Built with 
+                        <Heart size={14} className="text-rose-500 fill-rose-500 animate-pulse" /> 
+                        by <span className="text-slate-300 font-medium">Knight Coders</span>.
+                    </p>
+                    
+                    <div className="flex gap-6 text-sm text-slate-500">
+                        <a href="#" className="hover:text-indigo-400 transition-colors">Privacy Policy</a>
+                        <a href="#" className="hover:text-indigo-400 transition-colors">Terms of Service</a>
+                    </div>
+                </div>
+
+            </div>
+        </footer>
+    );
+};
+
+// Helper Component for List Links
+const FooterLink = ({ href, children }) => (
+    <li>
+        <a 
+            href={href} 
+            className="text-slate-400 hover:text-indigo-400 transition-colors text-sm flex items-center gap-1 group"
+        >
+            <span className="w-0 group-hover:w-2 h-px bg-indigo-400 transition-all duration-300"></span>
+            {children}
+        </a>
+    </li>
+);
+
+// Helper Component for Social Icons
+const SocialLink = ({ href, icon,RP_color }) => (
+    <a
+        href={href}
+        target="_blank"
+        rel="noreferrer"
+        className={`w-10 h-10 rounded-lg bg-slate-900 border border-slate-700 flex items-center justify-center text-slate-400 transition-all duration-300 hover:text-white hover:-translate-y-1 hover:shadow-lg ${RP_color}`}
+    >
+        {icon}
+    </a>
+);
       {/* Footer */}
       <footer className="py-8 px-4 border-t border-white/5 text-center text-ink-400 text-sm">
         Built with ❤️ for Indian students · Powered by Whisper + Groq
@@ -315,3 +511,4 @@ export default function LandingPage() {
     </div>
   )
 }
+export default Footer;
